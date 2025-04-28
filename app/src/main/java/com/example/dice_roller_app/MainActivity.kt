@@ -20,10 +20,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableIntStateOf
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,12 +33,18 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Dice_Roller_AppTheme {
-                DiceRollerApp()
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ){
+                    DiceRollerApp()
+                }
+
             }
         }
     }
 }
-@Preview
+@Preview(showBackground = true, name = "Dice Roller Preview")
 @Composable
 fun DiceRollerApp() {
     DiceWithButtonAndImage(modifier = Modifier
@@ -48,7 +56,7 @@ fun DiceRollerApp() {
 
 @Composable
 fun DiceWithButtonAndImage(modifier: Modifier = Modifier) {
-    var result by remember { mutableStateOf(1)}
+    var result by remember { mutableIntStateOf(1)}
     val imageResource = when (result){
         1 -> R.drawable.dice_1
         2 -> R.drawable.dice_2
